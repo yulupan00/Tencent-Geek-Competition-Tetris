@@ -57,19 +57,19 @@ def get_piece(weightIndex, count):
     stateIndex = count % 4
     shapeIndex = -1
     if (weightIndex >= 0  and weightIndex <= 1):
-        shapeIndex = 0;
+        shapeIndex = 0
     elif weightIndex > 1 and weightIndex <= 4:
-        shapeIndex = 1;
+        shapeIndex = 1
     elif (weightIndex > 4 and weightIndex <= 7) :
-        shapeIndex = 2;
+        shapeIndex = 2
     elif (weightIndex > 7 and weightIndex <= 11) :
-        shapeIndex = 3;
+        shapeIndex = 3
     elif (weightIndex > 11 and weightIndex <= 16) :
-        shapeIndex = 4;
+        shapeIndex = 4
     elif (weightIndex > 16 and weightIndex <= 22) :
-        shapeIndex = 5;
+        shapeIndex = 5
     elif (weightIndex > 22) :
-        shapeIndex = 6;
+        shapeIndex = 6
     p = TETROMINOS[shapeIndex][stateIndex]
     return shapeIndex*4+stateIndex
 
@@ -78,7 +78,7 @@ def all_piece(v):
     for i in range(10000):
         v = get_ran(v)
         p = get_piece(v%29, i)
-        l.append[p]
+        l.append(p)
     return l
 
 l = all_piece(v)
