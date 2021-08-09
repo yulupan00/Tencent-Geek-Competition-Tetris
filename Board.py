@@ -22,17 +22,23 @@ class Board():
             self.board[y + piece.x][x + piece.y] = 1
 
     def clear_lines(self):
-        lines_to_clear = [index for index, row in enumerate(
-            self.board) if sum(row) == BOARD_WIDTH]
-        #Rough estimate of score
+        lines_to_clear = []
+        grid_num = 0
+        for index, row in enumerate(self.board):
+            row_num = sum(row)
+            if row_num == BOARD_WIDTH:
+                lines_to_clear.append(index)
+            grid_num += row_num
+
+        # Calculate the score earned by this placement
         if len(lines_to_clear) == 1:
-            self.score += 40
+            self.score += grid_num
         elif len(lines_to_clear) == 2:
-            self.score += 100
+            self.score += 3 * grid_num
         elif len(lines_to_clear) == 3:
-            self.score += 300
+            self.score += 6 * grid_num
         elif len(lines_to_clear) == 4:
-            self.score += 1200
+            self.score += 10 * grid_num
 
         if lines_to_clear:
             self.board = [row for idx, row in enumerate(self.board) if idx not in lines_to_clear]
