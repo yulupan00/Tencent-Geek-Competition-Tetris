@@ -67,9 +67,13 @@ class Board():
                 i += 1
             y_store.append(20-i)
         for i in range(len(y_store) - 1):
-            bumpiness = abs(y_store[i] - y_store[i+1])
+            # compensate for the two side columns 
+            if i == 0 or i == 8:
+                bumpiness = 2 * abs(y_store[i] - y_store[i+1])
+            else:
+                bumpiness = abs(y_store[i] - y_store[i+1])
             max_bumpiness = max(bumpiness, max_bumpiness)
-            total_bumpiness += abs(y_store[i] - y_store[i+1])
+            total_bumpiness += bumpiness
         return total_bumpiness
 
     def height(self):
@@ -118,7 +122,7 @@ class Board():
                 return False
             if self.board[piece.x+y][piece.y+x] != 0:
                 return False
-        return True;
+        return True
 
     def gg(self):
         if self.height()[1] >= 17:
