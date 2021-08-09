@@ -86,6 +86,7 @@ class Board():
         sum_height = 0
         max_height = 0
         min_height = BOARD_HEIGHT
+        sum_height_half_fill = 0
 
         for col in zip(*self.board):
             i = 0
@@ -93,11 +94,12 @@ class Board():
                 i += 1
             height = BOARD_HEIGHT - i
             sum_height += height
+            sum_height_half_fill += height - BOARD_HEIGHT / 2
             if height > max_height:
                 max_height = height
             elif height < min_height:
                 min_height = height
-        return sum_height, max_height, min_height
+        return sum_height, max_height, min_height, sum_height_half_fill
 
     def is_line(self, i):
         for j in range(10):

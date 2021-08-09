@@ -37,9 +37,15 @@ class GameManager():
                 score = None
                 #If reaches the last element in working_pieces, return the score
                 if idx == len(working_piece)-1:
-                    sum_height, max, sum_height_modified = _grid.height()
+                    sum_height, max, min, is_half_fill = _grid.height()
                     line_weight = _LINE_WEIGHT
                     bump_weight = _BUMP_WEIGHT
+                    # To get a high score, we want to clear lines only when there 
+                    # are a decent number of blocks.
+                    if is_half_fill < 0:
+                         line_weight = 0
+                         if max < 13:
+                            bump_weight /= 2
                     score = _HEIGHT_WEIGHT*sum_height + line_weight * _grid.num_line() + \
                             _HOLE_WEIGHT*_grid.number_of_holes() +  bump_weight*_grid.bumpiness()
                 #Else use recursion to get to the last piece 
